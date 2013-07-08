@@ -1,32 +1,3 @@
-# Heroku Dyno Status Board
-
-Users will be able to log in and manage their Heroku app dynos.
-
-A work in progress.
-
-
-## Setup
-
-Install required gems
-
-```bash
-bundle
-```
-
-Start the server
-
-```bash
-bundle exec rackup -p 3000
-```
-
-
-## Authors
-
-  * Jessica Dillon / [@jessicard](https:github.com/jessicard)
-
-
-## License
-
 Copyright (c) 2012 G5
 
 MIT License
