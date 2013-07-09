@@ -2,7 +2,7 @@
 .DS_Store
 .rvmrc
 .env
+.jshintrc
 
 # Files used for locally testing SSL
-server.crt
-server.key
+ssl/*
