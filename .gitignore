@@ -1,2 +1,8 @@
+# Ignored files
 .DS_Store
 .rvmrc
+.env
+
+# Files used for locally testing SSL
+server.crt
+server.key
