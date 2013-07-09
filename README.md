@@ -16,8 +16,10 @@ bundle
 Start the server
 
 ```bash
-bundle exec rackup -p 3000
+bundle exec thin start -R config.ru
 ```
+
+This app requires a self-signed SSL cert to run locally.
 
 
 ## Authors
