@@ -18,4 +18,6 @@ if ENV['RACK_ENV'] == 'development'
     server.ssl = true
     server.ssl_options = ssl_options
   end
+else
+  run G5::HerokuDynoStatusBoard
 end
