@@ -17,7 +17,7 @@ module G5
 
 
     get '/' do
-      '<a href="/sign_in">Sign in with Heroku</a>'
+      send_file File.expand_path('index.html', settings.public_folder)
     end
 
     get '/sign_in' do
