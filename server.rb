@@ -26,13 +26,17 @@ module G5
 
     get '/auth/:name/callback' do
       auth = request.env['omniauth.auth']
-      access_token = request.env['omniauth.auth']['credentials']['token']
-      heroku_api = Heroku::API.new(:api_key => access_token)
-      @apps = heroku_api.get_apps.body
+      access_token = auth['credentials']['token']
+      session['access_token'] = access_token
 
-      puts @apps
+      redirect '/#/heroku_apps'
+    end
 
-      redirect '/'
+    get '/heroku_apps' do
+      heroku_api = Heroku::API.new(:api_key => session['access_token'])
+      @apps = { :heroku_apps => heroku_api.get_apps.body }
+
+      @apps.to_json
     end
 
   end
