@@ -11,8 +11,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <p>hi haters</p>
-    <a href="/sign_in">sign in with heroku</a>
+
+    <script type="text/x-handlebars" data-template-name="application">
+      <h1>Heroku Dyno Status Board</h1>
+      <hr>
+      <p>{{ outlet }}</p>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="index">
+      <a href="/sign_in">log in with heroku</a>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="heroku_apps">
+      <h2>Apps</h2>
+      {{#each app in controller}}
+      <ul>
+        {{#linkTo "heroku_app" app}}
+        <li>{{ app.name }}</li>
+        {{/linkTo}}
+      </ul>
+      {{else}}
+        <p>No Apps Found</p>
+      {{/each}}
+    </script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="js/libs/handlebars.js"></script>
