@@ -20,5 +20,7 @@ App.HerokuAppsRoute = Ember.Route.extend({
 App.Store = DS.Store.extend();
 
 App.HerokuApp = DS.Model.extend({
-  name: DS.attr('string')
+  name: DS.attr('string'),
+  dynos: DS.attr('number'),
+  workers: DS.attr('number')
 });
