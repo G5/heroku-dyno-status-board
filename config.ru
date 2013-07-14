@@ -1,23 +1,20 @@
 ENV['RACK_ENV'] ||= 'development'
-require "rubygems"
-require "bundler/setup"
 
+require 'rubygems'
+require 'bundler/setup'
+require 'dotenv'
 require File.expand_path(File.join(File.dirname(__FILE__), 'server'))
-# Adds SSL for testing OmniAuth locally
-if ENV['RACK_ENV'] == 'development'
-  require 'dotenv'
 
-  Dotenv.load
+Dotenv.load if ENV['RACK_ENV'] == 'development'
 
-  G5::HerokuDynoStatusBoard.run! do |server|
-    ssl_options = {
-      :cert_chain_file => ENV['CERT_CHAIN_FILE'],
-      :private_key_file => ENV['PRIVATE_KEY_FILE'],
-      :verify_peer => false
-    }
-    server.ssl = true
-    server.ssl_options = ssl_options
-  end
-else
-  run G5::HerokuDynoStatusBoard
+use Rack::Session::Cookie, secret: 'foo', path: '/'
+use OmniAuth::Builder do
+  provider :heroku, ENV['HEROKU_OAUTH_ID'], ENV['HEROKU_OAUTH_SECRET']
 end
+
+static_app = Rack::Builder.new do
+  use Rack::Static, :urls => [''], :root => 'public', :index => 'index.html'
+  run Rack::File.new('public')
+end
+
+run Rack::Cascade.new([static_app, G5::HerokuDynoStatusBoard])

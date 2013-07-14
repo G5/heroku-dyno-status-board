@@ -1,43 +1,52 @@
 require 'thin'
-require 'sinatra'
+require 'grape'
+require 'grape-rabl'
 require 'omniauth'
 require 'omniauth-heroku'
 require 'heroku-api'
+require 'pry'
 
 module G5
-  class HerokuDynoStatusBoard < Sinatra::Base
+  class HerokuDynoStatusBoard < Grape::API
 
-    configure do
-      enable :sessions
-    end
-
-    use OmniAuth::Builder do
-      provider :heroku, ENV['HEROKU_OAUTH_ID'], ENV['HEROKU_OAUTH_SECRET']
-    end
-
-
-    get '/' do
-      send_file File.expand_path('index.html', settings.public_folder)
-    end
-
-    get '/sign_in' do
-      redirect '/auth/heroku'
-    end
+    format :json
 
     get '/auth/:name/callback' do
-      auth = request.env['omniauth.auth']
-      access_token = auth['credentials']['token']
-      session['access_token'] = access_token
+      cookies[:auth] = {
+        path: '/'
+      }
+      cookies[:auth][:value] = request.env['omniauth.auth']['credentials']['token']
 
-      redirect '/#/heroku_apps'
+      # Test Apps For Mock
+      # heroku = Heroku::API.new(:api_key => access_token, :mock => true)
+      # heroku.post_app(:name => 'my-test-app')
+      # heroku.post_app(:name => 'my-test-app2')
+      200
     end
 
-    get '/heroku_apps' do
-      heroku_api = Heroku::API.new(:api_key => session['access_token'])
-      @apps = { :heroku_apps => heroku_api.get_apps.body }
+    namespace :heroku do
+      get :apps do
 
-      @apps.to_json
+        heroku = Heroku::API.new(:api_key => cookies[:auth])
+        heroku.get_apps.body
+      end
     end
+
+    # get '/user' do
+    #   @user = { :user => session['heroku_api'].get_user.body }
+    #   @user.to_json
+    # end
+
+    # get '/heroku_apps/:name' do
+    #   @app = { :heroku_app => session['heroku_api'].get_app(params[:name]).body }
+    #   binding.pry
+    #   @app.to_json
+    # end
+
+    # post '/heroku_apps/:name' do
+    #   # Support only for cedar currently
+    #   session['heroku_api'].post_ps_scale(params[:name], 'worker', '1')
+    # end
 
   end
 end

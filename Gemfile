@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
 
 gem 'json'
-gem 'sinatra'
+gem 'grape'
+gem 'grape-rabl'
 gem 'omniauth'
 gem 'omniauth-heroku'
 gem 'heroku-api'
