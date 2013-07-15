@@ -4,7 +4,6 @@ require 'omniauth'
 require 'omniauth-heroku'
 require 'json'
 require 'heroku-api'
-require 'pry'
 
 module G5
   class HerokuDynoStatusBoard < Grape::API
