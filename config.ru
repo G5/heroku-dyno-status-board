@@ -2,10 +2,13 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'rubygems'
 require 'bundler/setup'
-require 'dotenv'
 require File.expand_path(File.join(File.dirname(__FILE__), 'server'))
 
-Dotenv.load if ENV['RACK_ENV'] == 'development'
+
+if ENV['RACK_ENV'] == 'development'
+  require 'dotenv'
+  Dotenv.load
+end
 
 use Rack::Session::Cookie, secret: 'foo', path: '/'
 use OmniAuth::Builder do
