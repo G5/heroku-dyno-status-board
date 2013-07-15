@@ -39,6 +39,5 @@ G5.Store = DS.Store.extend();
 
 G5.App = DS.Model.extend({
   name: DS.attr('string'),
-  dynos: DS.attr('number'),
-  workers: DS.attr('number')
+  dynos: DS.attr('number')
 });

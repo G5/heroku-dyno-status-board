@@ -16,20 +16,26 @@
 
     <script type="text/x-handlebars" data-template-name="application">
       <div class="container">
-        <h1>Heroku Dyno Status Board</h1>
+        {{ partial "header"}}
         <hr>
         <p>{{ outlet }}</p>
       </div>
     </script>
 
+    <script type='text/x-handlebars' data-template-name="_header">
+      <header>
+        <h1>Heroku Dyno Status Board</h1>
+      </header>
+    </script>
+
     <script type="text/x-handlebars" data-template-name="index">
-      <a href="/auth/heroku">log in with heroku</a>
+      <a href="/auth/heroku">Log in with Heroku</a>
     </script>
 
     <script type="text/x-handlebars" data-template-name="apps">
-      <a href="/logout">logout</a>
+      <a href="/logout">Logout</a>
       <div class="row">
-        <div class="span6">
+        <div class="span5">
           <h2>Apps</h2>
           {{#each app in controller}}
           <ul>
@@ -41,35 +47,24 @@
             <p>No Apps Found</p>
           {{/each}}
         </div>
-        <div class="span6">
-          <h2>App</h2>
-          <ul>
-            {{ outlet }}
-          </ul>
+        <div class="span7">
+          {{ outlet }}
         </div>
       </div>
     </script>
 
     <script type="text/x-handlebars" data-template-name="app">
-      <li>
-        name: {{ name }}
-      </li>
-      <li>
-        {{ partial "dynos" }}
-      </li>
+      <h2>{{ name }}</h2>
+      <p>{{ partial "dynos" }}</p>
     </script>
 
     <script type="text/x-handlebars" data-template-name="_dynos">
-      dynos: {{ dynos }}
-      <p>
-        <a href="#" {{ action "addDyno" this }} class="add">+ Add Dyno</a>
-      </p>
-      <p>
-        <a href="#" {{ action "removeDyno" this }} class="remove">- Remove Dyno</a>
-      </p>
-      <p>
-        <a href="#" {{ action "removeAllDynos" this }} class="remove-all">x Remove All Dynos</a>
-      </p>
+      <h3>Dynos: {{ dynos }}</h3>
+      <button {{ action "addDyno" this }} class="btn btn-success">+ Add Dyno</button>
+      {{#if dynos}}
+        <button {{ action "removeDyno" this }} class="btn btn-warning">- Remove Dyno</button>
+        <button {{ action "removeAllDynos" this }} class="btn btn-danger">x Remove All Dynos</button>
+      {{/if}}
     </script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
