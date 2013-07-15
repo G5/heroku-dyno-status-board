@@ -16,7 +16,7 @@ bundle
 Start the server
 
 ```bash
-bundle exec thin start -R config.ru
+./start.sh
 ```
 
 This app requires a self-signed SSL cert to run locally.

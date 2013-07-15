@@ -30,11 +30,6 @@ GEM
       rack-accept
       rack-mount
       virtus
-    grape-rabl (0.2.0)
-      grape (~> 0.3)
-      i18n
-      rabl
-      tilt
     hashie (2.0.5)
     heroku-api (0.3.13)
       excon (~> 0.25.0)
@@ -67,8 +62,6 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
-    rabl (0.8.6)
-      activesupport (>= 2.3.14)
     rack (1.5.2)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -81,7 +74,6 @@ GEM
       rack (>= 1.0.0)
     thread_safe (0.1.0)
       atomic
-    tilt (1.4.1)
     tzinfo (0.3.37)
     virtus (0.5.5)
       backports (~> 3.3)
@@ -93,7 +85,6 @@ PLATFORMS
 DEPENDENCIES
   dotenv-rails
   grape
-  grape-rabl
   heroku-api
   json
   omniauth

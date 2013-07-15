@@ -23,17 +23,18 @@
     </script>
 
     <script type="text/x-handlebars" data-template-name="index">
-      <a href="/sign_in">log in with heroku</a>
+      <a href="/auth/heroku">log in with heroku</a>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="heroku_apps">
+    <script type="text/x-handlebars" data-template-name="apps">
+      <a href="/logout">logout</a>
       <div class="row">
         <div class="span6">
           <h2>Apps</h2>
-          {{#each heroku_app in controller}}
+          {{#each app in controller}}
           <ul>
-            {{#linkTo "heroku_app" heroku_app}}
-            <li>{{ heroku_app.name }}</li>
+            {{#linkTo "app" app}}
+            <li>{{ app.name }}</li>
             {{/linkTo}}
           </ul>
           {{else}}
@@ -41,6 +42,7 @@
           {{/each}}
         </div>
         <div class="span6">
+          <h2>App</h2>
           <ul>
             {{ outlet }}
           </ul>
@@ -48,10 +50,26 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="heroku_app">
-      <li>name: {{ name }}</li>
-      <li>dynos: {{ dynos }}</li>
-      <li>workers: {{ workers }}</li>
+    <script type="text/x-handlebars" data-template-name="app">
+      <li>
+        name: {{ name }}
+      </li>
+      <li>
+        {{ partial "dynos" }}
+      </li>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="_dynos">
+      dynos: {{ dynos }}
+      <p>
+        <a href="#" {{ action "addDyno" this }} class="add">+ Add Dyno</a>
+      </p>
+      <p>
+        <a href="#" {{ action "removeDyno" this }} class="remove">- Remove Dyno</a>
+      </p>
+      <p>
+        <a href="#" {{ action "removeAllDynos" this }} class="remove-all">x Remove All Dynos</a>
+      </p>
     </script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

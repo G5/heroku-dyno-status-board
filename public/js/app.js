@@ -1,25 +1,43 @@
-var App = Ember.Application.create();
+var G5 = Ember.Application.create();
 
 // Router
-App.Router.map(function() {
-  this.resource('heroku_apps', function(){
-    this.resource('heroku_app', { path: ':heroku_app_id' });
+G5.Router.map(function() {
+  this.resource('apps', function(){
+    this.resource('app', { path: ':app_id' });
   });
 });
 
-App.HerokuAppsRoute = Ember.Route.extend({
+G5.AppsRoute = Ember.Route.extend({
   model: function() {
-    return App.HerokuApp.find();
+    return G5.App.find();
   }
 });
 
 // Controllers
-
+G5.AppController = Ember.ObjectController.extend({
+  sortProperties: ['name'],
+  addDyno: function(app) {
+    app.set('dynos', app.get('dynos')+1);
+    app.save()
+  },
+  removeDyno: function(app) {
+    app.set('dynos', app.get('dynos')-1);
+    app.save()
+  },
+  removeAllDynos: function(app) {
+    app.set('dynos', 0);
+    app.save()
+  }
+});
 
 // Models
-App.Store = DS.Store.extend();
+DS.RESTAdapter.reopen({
+  namespace: 'heroku'
+});
 
-App.HerokuApp = DS.Model.extend({
+G5.Store = DS.Store.extend();
+
+G5.App = DS.Model.extend({
   name: DS.attr('string'),
   dynos: DS.attr('number'),
   workers: DS.attr('number')
