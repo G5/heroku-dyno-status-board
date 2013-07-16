@@ -27,6 +27,18 @@ This app requires a self-signed SSL cert to run locally.
   * Jessica Dillon / [@jessicard](https:github.com/jessicard)
 
 
+## Contributing
+
+1. Fork it
+1. Get it running
+1. Create your feature branch (git checkout -b my-new-feature)
+1. Write your code and specs
+1. Commit your changes (git commit -am 'Add some feature')
+1. Push to the branch (git push origin my-new-feature)
+1. Create new Pull Request
+1. If you find bugs, have feature requests or questions, please file an issue.
+
+
 ## License
 
 Copyright (c) 2012 G5
