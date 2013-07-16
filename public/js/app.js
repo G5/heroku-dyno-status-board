@@ -14,8 +14,12 @@ G5.AppsRoute = Ember.Route.extend({
 });
 
 // Controllers
+G5.AppsController = Ember.ArrayController.extend({
+  sortProperties: ['dynos'],
+  sortAscending: false
+});
+
 G5.AppController = Ember.ObjectController.extend({
-  sortProperties: ['name'],
   addDyno: function(app) {
     app.set('dynos', app.get('dynos')+1);
     app.save()
