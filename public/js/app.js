@@ -22,15 +22,15 @@ G5.AppsController = Ember.ArrayController.extend({
 G5.AppController = Ember.ObjectController.extend({
   addDyno: function(app) {
     app.set('dynos', app.get('dynos')+1);
-    app.save()
+    app.save();
   },
   removeDyno: function(app) {
     app.set('dynos', app.get('dynos')-1);
-    app.save()
+    app.save();
   },
   removeAllDynos: function(app) {
     app.set('dynos', 0);
-    app.save()
+    app.save();
   }
 });
 
