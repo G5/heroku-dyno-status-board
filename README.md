@@ -19,7 +19,7 @@ Start the server
 ./start.sh
 ```
 
-This app requires a self-signed SSL cert to run locally.
+This app requires a self-signed SSL cert to run locally (see https://devcenter.heroku.com/articles/ssl-certificate-self for details on creating a self-signed SSL). Add these files to a folder in root named "ssl" to be ignored by Git.
 
 
 ## Authors
